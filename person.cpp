@@ -21,12 +21,14 @@ using std::endl;
 
 
 
-Person::Person(const string &name, const Date &birthday) :_name(name), _birthday(birthday){
+Person::Person(const string &name, const Date &birthday)
+        :_name(name), _birthday(birthday){
 
 
 }
 
-Person::Person(const string &name, size_t year, size_t month, size_t day) : _name(name), _birthday(Date(year,month,day)){
+Person::Person(const string &name, size_t year, size_t month, size_t day)
+        : _name(name), _birthday(Date(year,month,day)){
 
 }
 
@@ -35,10 +37,11 @@ Person::~Person() {
 }
 
 string Person::ToString() const {
+    stringstream ss;
+    ss << "{name: " << _name << ", birthday: " << _birthday.ToString() << "}}";
+    //string convert = "{name: " + _name + ", birthday: " + _birthday.ToString() + "}}";
 
-    string convert = "{name: " + _name + ", birthday: " + _birthday.ToString() + "}}";
-
-    return convert;
+    return ss.str();
 }
 
 void Person::Read(istream &input) {

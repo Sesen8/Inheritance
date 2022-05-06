@@ -12,6 +12,30 @@
 
 enum Rank {ASSISTANT_PROFESSOR, ASSOCIATE_PROFESSOR, PROFESSOR};
 
+class Professor: public Person{
+    string _department;
+    Date _hireDate;
+    Rank _rank;
+    float _salary;
+
+public:
+    Professor(const string& name, const Date& birthday, const string& department);
+    Professor(const string& name, const Date& birthday, const string& department, const Date & hireDate);
+    Professor(const string& name, const Date& birthday, const string& department, const Date& hireDate, Rank rank);
+    Professor(const string& name, const Date& birthday, const string& department, const Date& hireDate, Rank rank, float salary);
+    ~Professor();
+    string ToString()const;
+    void Read(istream& input);
+    void Write(ostream& output)const;
+    void Raise(float percentage);
+    void Promote();
+    Rank GetRank()const;
+    float GetSalary()const;
+
+
+
+};
+
 
 
 #endif
