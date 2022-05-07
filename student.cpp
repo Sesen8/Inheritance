@@ -78,15 +78,25 @@ void Student::Write(ostream &output) const {
 }
 
 void Student::AddGrade(float grade, size_t credits) {
+    if (_gpa == 0.0 && _credits == 0) {
+        _gpa = grade;
+        _credits = credits;
+
+
+    }
+    else {
+
     size_t totalGrade = _gpa * _credits;
 
     size_t newCredits = _credits + credits;
     _credits = newCredits;
 
-    totalGrade+=grade;
+    totalGrade += grade;
 
-    size_t newGPA = totalGrade/newCredits;
+    size_t newGPA = totalGrade / newCredits;
     _gpa = newGPA;
+}
+
 
 }
 

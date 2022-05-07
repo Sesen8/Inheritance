@@ -96,9 +96,18 @@ void Professor::Raise(float percentage) {
 void Professor::Promote() {
     if (_rank == ASSISTANT_PROFESSOR ){
         _rank = ASSOCIATE_PROFESSOR;
+        if(_salary <70000){
+            _salary == 70000;
+        }
+
+
     }
     else if(_rank == ASSOCIATE_PROFESSOR){
         _rank = PROFESSOR;
+        if(_salary <75000){
+            _salary == 75000;
+        }
+
     }
 
 }

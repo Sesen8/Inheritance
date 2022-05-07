@@ -119,14 +119,18 @@ int main(int argc, char* argv[]) {
 
         }
         else if (userOption == 4){		// List All People
+            if(people.size() == 0){
+                cout << "No People added" << endl;
+                continue;
+            }
             for(int i = 0; i<people.size(); i++){
 
                 if(dynamic_cast<Student*>(people.at(i)) != nullptr){
-                    Student* foundStudent=dynamic_cast<Student*>(people.at(i));
+                    Student* foundStudent=(dynamic_cast<Student*>(people.at(i)));
                     cout << foundStudent->ToString() << endl;
                 }
                 else if(dynamic_cast<Professor*>(people.at(i)) != nullptr){
-                    Professor* foundProfessor=dynamic_cast<Professor*>(people.at(i));
+                    Professor* foundProfessor=(dynamic_cast<Professor*>(people.at(i)));
                     cout << foundProfessor->ToString() << endl;
                 }
                 else {
@@ -137,25 +141,59 @@ int main(int argc, char* argv[]) {
 
 
 		}
+
+
         else if (userOption == 5){		// Show Students Report
+            if(people.size() == 0){
+                cout << "No People added" << endl;
+                continue;
+            }
+            bool check = false;
+
 
             for(int i = 0; i<people.size(); i++) {
-                if(dynamic_cast<Student*>(people.at(i)) != nullptr){
-                    Student* foundStudent=dynamic_cast<Student*>(people.at(i));
+                if((dynamic_cast<Student*>(people.at(i))) != nullptr){
+                    Student* foundStudent=(dynamic_cast<Student*>(people.at(i)));
                     cout << foundStudent->ToString() << endl;
+                    check = true;
                 }
             }
+            if(check == false){
+                cout << "No Student added" << endl;
+                continue;
+            }
 		}
+
+
 
         else if (userOption == 6){		// Show Professor Report
+            if(people.size() == 0){
+                cout << "No People added" << endl;
+                continue;
+            }
+            bool check = false;
+
             for(int i = 0; i<people.size(); i++) {
                 if(dynamic_cast<Professor*>(people.at(i)) != nullptr){
-                    Professor* foundProfessor=dynamic_cast<Professor*>(people.at(i));
+                    Professor* foundProfessor=(dynamic_cast<Professor*>(people.at(i)));
                     cout << foundProfessor->ToString() << endl;
+                    check = true;
                 }
             }
+            if(check == false){
+                cout << "No Student added" << endl;
+                continue;
+            }
 		}
+
+
+
         else if (userOption == 7) {        // Show !Professor !Student
+            if(people.size() == 0){
+                cout << "No People added" << endl;
+                continue;
+            }
+
             for (int i = 0; i < people.size(); i++) {
 
                 if ((dynamic_cast<Student *>(people.at(i)) == nullptr) &&
@@ -166,25 +204,168 @@ int main(int argc, char* argv[]) {
             }
         }
 
+
+
+
+
         else if (userOption == 8){		// Calculate Average GPA
+            int numofStudents = 0;
+            float totalGPA;
             for(int i = 0; i<people.size(); i++) {
                 if(dynamic_cast<Student*>(people.at(i)) != nullptr){
                     Student* foundStudent=dynamic_cast<Student*>(people.at(i));
-                    size_t gpa = foundStudent->GetGPA();
-                    //size_t totalGPA += gpa;
+                    float gpa = foundStudent->GetGPA();
+                    totalGPA += gpa;
+                    numofStudents++;
+                }
+
+            }
+
+            float avgGPA = (totalGPA)/static_cast<float>(numofStudents);
+            cout << "The average GPA of the students is: " << avgGPA << endl;
+
+		}
+
+
+
+
+
+        else if (userOption == 9){		// Calculate Average Salary
+            float numofProfessors = 0;
+            float totalSalary;
+            for(int i = 0; i<people.size(); i++) {
+                if(dynamic_cast<Professor*>(people.at(i)) != nullptr){
+                    Professor* foundProfessor=dynamic_cast<Professor*>(people.at(i));
+                    float salary = foundProfessor->GetSalary();
+                    totalSalary += salary;
+                    numofProfessors++;
+                }
+
+            }
+
+            float avgSal = (totalSalary)/numofProfessors;
+            cout << "The average salary of the professors is: " << avgSal << endl;
+
+		}
+
+
+
+
+
+        else if (userOption == 10){	// Input Grades to Student
+            for(int i = 0; i<people.size(); i++) {
+                if(dynamic_cast<Student*>(people.at(i)) != nullptr){
+                    Student* foundStudent=dynamic_cast<Student*>(people.at(i));
+                    cout << i << " " << foundStudent->ToString() << endl;
                 }
             }
-		}
-        else if (userOption == 9){		// Calculate Average Salary
+
+            int index =0;
+            cout << "Number of student to input grades to: ";
+            cin >>index;
+            while(index>people.size()-1){
+                cout <<"Position Out of Range!" << endl;
+                cout << "Number of student to input grades to: ";
+                cin >>index;
+            }
+            cout << "Grade of the student [0.0 to 4.0 scale]: ";
+            float grade;
+            string strGrade;
+            cin >> strGrade;
+            while(!isdigit(strGrade.at(0))){
+                cout <<"Incorrect input!" << endl;
+                cout << "Grade of the student [0.0 to 4.0 scale]: ";
+                cin >> strGrade;
+
+            }
+            grade = stof(strGrade);
+            while(grade>4.0 || grade<0.0){
+                cout <<"Invalid grade value, make sure to use the scale [0.0 to 4.0]" << endl;
+                cout << "Grade of the student [0.0 to 4.0 scale]: ";
+                cin >> grade;
+
+            }
+            cout << "Credits {1,2,3,4,5}: ";
+            size_t credits;
+            cin >> credits;
+            while(credits>5 || credits<1){
+                cout <<"Invalid grade value, make sure to use the scale {1,2,3,4,5}" << endl;
+                cout << "Credits {1,2,3,4,5}: ";
+                cin >> credits;
+            }
+
+            dynamic_cast<Student*>(people.at(index))->AddGrade(grade,credits);
 
 		}
-        else if (userOption == 10){	// Input Grades to Student
 
-		}
+
+
+
+
         else if (userOption == 11){	// Promote Professor
+            for (int i = 0; i < people.size(); i++) {
+
+                if(dynamic_cast<Professor*>(people.at(i)) != nullptr){
+                    Professor* foundProfessor=dynamic_cast<Professor*>(people.at(i));
+                    cout << i << " " << foundProfessor->ToString() << endl;
+                }
+
+            }
+            cout << "Number of Professor to Promote: ";
+            size_t index;
+            cin >>index;
+            while(index>people.size()-1){
+                cout <<"Position Out of Range!" << endl;
+                cout << "Number of professor to give raise: ";
+                cin >>index;
+            }
+            (dynamic_cast<Professor*>(people.at(index)))->Promote();
+
 
 		}
         else if (userOption == 12){	// Give Raise to Professor
+            for (int i = 0; i < people.size(); i++) {
+
+                if(dynamic_cast<Professor*>(people.at(i)) != nullptr){
+                    Professor* foundProfessor=dynamic_cast<Professor*>(people.at(i));
+                    cout << i << " " << foundProfessor->ToString() << endl;
+                }
+
+            }
+
+            int index =0;
+            cout << "Number of professor to give raise: ";
+            cin >>index;
+            while(index>people.size()-1){
+                cout <<"Position Out of Range!" << endl;
+                cout << "Number of professor to give raise: ";
+                cin >>index;
+            }
+
+            cout << "Raise to the professor [0.0, 50.0]: ";
+            float raise;
+            string strRaise;
+            cin >> strRaise;
+            while(!isdigit(strRaise.at(0))){
+                cout <<"Incorrect input!" << endl;
+                cout << "Raise to the professor [0.0, 50.0]: ";
+                cin >> strRaise;
+
+            }
+            raise = stof(strRaise);
+            while(raise>50.0 || raise<0.0){
+                cout <<"Invalid raise value, make sure to use the scale [0.0, 50.0]" << endl;
+                cout << "Raise to the professor [0.0, 50.0]: ";
+                cin >> raise;
+
+            }
+
+            float newRaise = raise/100.0;
+            (dynamic_cast<Professor*>(people.at(index)))->Raise(newRaise);
+
+
+
+
 
 		}
         else if (userOption == 13){	// Load from File
