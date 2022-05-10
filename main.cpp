@@ -361,6 +361,7 @@ int main(int argc, char* argv[]) {
                 }
                 if(dynamic_cast<Student*>(people.at(i)) == nullptr){
                    cout << "Need to add Students first" << endl;
+                   continue;
             }
             }
 
