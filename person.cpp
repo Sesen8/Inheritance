@@ -39,29 +39,23 @@ Person::~Person() {
 string Person::ToString() const {
     stringstream ss;
     ss << "{name: " << _name << ", birthday: " << _birthday.ToString() << "}}";
-    //string convert = "{name: " + _name + ", birthday: " + _birthday.ToString() + "}}";
-
     return ss.str();
 }
 
 void Person::Read(istream &input) {
-
     string line;
     getline(input,line);
     stringstream cutUp(line);
-
 
     string name;
     size_t year;
     size_t month;
     size_t day;
-
     cutUp >> name >> year >> month >> day;
 
     _name=name;
     Date newDate(year,month,day);
     _birthday = newDate;
-
 }
 
 void Person::Write(ostream &output) const {
@@ -72,8 +66,6 @@ void Person::Write(ostream &output) const {
     size_t day1 = _birthday.GetDay();
 
     output << name1 << " " << year1 << " " << month1 << " " << day1;
-
-
 }
 
 string Person::GetName() const {

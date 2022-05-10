@@ -37,17 +37,14 @@ Student::~Student() {
 }
 
 string Student::ToString() const {
-
     stringstream ss;
-    ss << "{Person: " <<  Person::ToString() << ", major: " << _major << ", credits:" << std::to_string(GetCredits()) << ", gpa: " << std::to_string(GetGPA()) << "}";
-
-
+    ss << "{Person: " <<  Person::ToString() << ", major: " << _major
+        << ", credits:" << std::to_string(GetCredits()) << ", gpa: " << std::to_string(GetGPA()) << "}";
 
     return ss.str();
 }
 
 void Student::Read(istream &input) {
-
     string line;
     getline(input,line);
     stringstream cutUp(line);
@@ -62,19 +59,15 @@ void Student::Read(istream &input) {
     _major=major1;
     _credits=credits1;
     _gpa=gpa1;
-
 }
 
 void Student::Write(ostream &output) const {
-
     string major1 =_major;
     size_t credits1 = GetCredits();
     float gpa1 = GetGPA();
 
     Person::Write(output);
     output << major1 << " " << credits1 << " " << gpa1;
-
-
 }
 
 void Student::AddGrade(float grade, size_t credits) {
