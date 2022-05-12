@@ -354,15 +354,23 @@ int main(int argc, char* argv[]) {
 
 
         else if (userOption == 10){	// Input Grades to Student
+            if(people.size() == 0){
+                cout << "No People added" << endl;
+                continue;
+            }
+            bool check = false;
+
             for(int i = 0; i<people.size(); i++) {
                 if(dynamic_cast<Student*>(people.at(i)) != nullptr){
                     Student* foundStudent=dynamic_cast<Student*>(people.at(i));
                     cout << i << " " << foundStudent->ToString() << endl;
+                    check = true;
                 }
-                if(dynamic_cast<Student*>(people.at(i)) == nullptr){
-                   cout << "Need to add Students first" << endl;
-                   continue;
+
             }
+            if(check==false){
+                cout << "No Student Added" << endl;
+                continue;
             }
 
             int index =0;
@@ -380,7 +388,10 @@ int main(int argc, char* argv[]) {
                     cin >>index;
                 }
 
+
             }
+
+
             cout << "Grade of the student [0.0 to 4.0 scale]: ";
             float grade;
             string strGrade;
@@ -440,6 +451,7 @@ int main(int argc, char* argv[]) {
                 }
 
             }
+
             (dynamic_cast<Professor*>(people.at(index)))->Promote();
 
 
@@ -469,6 +481,7 @@ int main(int argc, char* argv[]) {
                 }
 
             }
+
             cout << "Raise to the professor [0.0, 50.0]: ";
             float raise;
             string strRaise;
