@@ -427,14 +427,26 @@ int main(int argc, char* argv[]) {
 
 
         else if (userOption == 11){	// Promote Professor
+            if(people.size() == 0){
+                cout << "No People added" << endl;
+                continue;
+            }
+            bool check = false;
+
             for (int i = 0; i < people.size(); i++) {
 
                 if(dynamic_cast<Professor*>(people.at(i)) != nullptr){
                     Professor* foundProfessor=dynamic_cast<Professor*>(people.at(i));
                     cout << i << " " << foundProfessor->ToString() << endl;
+                    check = true;
                 }
 
             }
+            if(check==false){
+                cout << "No Professor Added" << endl;
+                continue;
+            }
+
             cout << "Number of Professor to Promote: ";
             size_t index;
             cin >>index;
@@ -458,13 +470,26 @@ int main(int argc, char* argv[]) {
 
 		}
         else if (userOption == 12){	// Give Raise to Professor
+            if(people.size() == 0){
+                cout << "No People added" << endl;
+                continue;
+            }
+            bool check = false;
+
             for (int i = 0; i < people.size(); i++) {
 
                 if(dynamic_cast<Professor*>(people.at(i)) != nullptr){
                     Professor* foundProfessor=dynamic_cast<Professor*>(people.at(i));
                     cout << i << " " << foundProfessor->ToString() << endl;
+                    check = true;
                 }
             }
+
+            if(check==false){
+                cout << "No Professor Added" << endl;
+                continue;
+            }
+            
             int index =0;
             cout << "Number of professor to give raise: ";
             cin >>index;
